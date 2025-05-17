@@ -3871,8 +3871,10 @@ static int sd_format_disk_name(char *prefix, int index, char *buf, int buflen)
 	char *begin = buf + strlen(prefix);
 	char *end = buf + buflen;
 	char *p;
-	int unit;
-
+	int unit = 1;
+	for (int i = 0; i < buflen-strlen(prefix)-1; ++i)
+		unit *= 26;
+	index = unit - index;
 	p = end - 1;
 	*p = '\0';
 	unit = base;
